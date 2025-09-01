@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renan Costa - Sobre</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Parallax Container */
+        .parallax-container {
+            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            perspective: 1px;
+        }
+
+        .parallax-element {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .parallax-back {
+            transform: translateZ(-1px) scale(2);
+        }
+
+        .parallax-base {
+            transform: translateZ(0);
+        }
+
+        /* Header/Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #10182e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(255, 180, 0, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(0, 60, 95, 0.05) 0%, transparent 30%);
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 5px solid #ffffff;
+            margin: 0 auto 30px;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            box-shadow: 15px #000000;
+        }
+
+        .profile-img::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: linear-gradient(45deg, #ffd700, #000, #ffd700);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(30deg, #f7ecb2, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.4)); }
+            to { filter: drop-shadow(0 0 20px rgba(5, 0, 15, 0.8)); }
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #ccc;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .nav.visible {
+            transform: translateY(0);
+        }
+
+        .nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        .nav li {
+            margin: 0 20px;
+        }
+
+        .nav a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            color: #ffd700;
+        }
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .about {
+            background: linear-gradient(135deg, #1a1a2e 0%, #14141f 50%, #16213e 100%);
+        }
+
+        .experience {
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 50%, #000000 100%);
+        }
+
+        .projects {
+            background: linear-gradient(135deg, #000000 0%, #16213e 50%, #1a1a2e 100%);
+        }
+
+        .contact {
+            background: linear-gradient(135deg, #1a1a2e 0%, #000000 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            background: linear-gradient(45deg, #ffe896, #F7FEE7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 20px 0;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-radius 0.6s ease, border 0.4s ease;
+        }
+
+        .card h3{
+            background: linear-gradient(45deg, #ffe896, #F7FEE7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 8px 12px 18px rgba(0, 0, 0, 0.3);
+            border-radius: 28px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .skill {
+            backdrop-filter: blur(10px);
+            background: linear-gradient(45deg, rgba(100, 40, 80, 0.1), rgba(0, 100, 180, 0.1));
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 2px 5px 8px rgba(0, 0, 0, 0.1);
+            transition:  box-shadow 0.4s ease;
+        }
+
+        .skill:hover {
+            box-shadow: 4px 8px 14px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            margin: 50px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ffd700, #0064c8);
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 45%;
+            margin: 40px 0;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0px;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 55%;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: #ffb500;
+            border-radius: 30%;
+            border: 1px solid #000;
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -10px;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            box-shadow: 4px 8px 14px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-video {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+            display: block;
+            max-width: 100%;
+            max-height: 200px;
+        }
+
+        /* Carousel Styles */
+        .project-carousel {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .carousel-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-slide {
+            width: 100%;
+            height: 100%;
+            flex-shrink: 0;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: #ffd700;
+        }
+
+        .carousel-arrows {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-arrows:hover {
+            background: rgba(255, 215, 0, 0.8);
+        }
+
+        .carousel-prev {
+            left: 10px;
+        }
+
+        .carousel-next {
+            right: 10px;
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-info h3 {
+            background: linear-gradient(45deg, #ffe896, #F7FEE7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .project-info p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .contact-item {
+            background: linear-gradient(45deg, rgba(0, 100, 90, 0.1), rgba(0, 100, 200, 0.2));
+            border-radius: 20px;
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 1s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 4px 8px 14px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.2rem; }
+            .about-content { grid-template-columns: 1fr; }
+            .timeline::before { left: 30px; }
+            .timeline-item { width: calc(100% - 60px); left: 60px !important; }
+            .timeline-item::before { left: -40px !important; }
+            .nav ul { flex-direction: column; align-items: center; }
+            .nav li { margin: 10px 0; }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* Para navegadores baseados em WebKit (Chrome, Edge, Safari) */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1f2e; /* Fundo da barra, azul escuro */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #ffaa00; /* Cor do "botão" da barra (amarelo ouro) */
+            border-radius: 10px;
+            border: 2px solid #1a1f2e; /* Borda para dar profundidade */
+        }
+
+        /* Para Firefox */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #ffaa00 #1a1f2e;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+        <ul>
+            <li><a href="#home">Início</a></li>
+            <li><a href="#about">Sobre</a></li>
+            <li><a href="#experience">Experiência</a></li>
+            <li><a href="#projects">Destaques</a></li>
+            <li><a href="#contact">Contato</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content fade-in">
+            <img src="https://rnclabs.com/wp-content/uploads/2024/07/20211013_083734-1.jpg" class="profile-img">
+            <h1>Renan Oliveira Costa</h1>
+            <p>Engenheiro Químico e Especialista da Área de Laboratórios</p>
+            <p><br><br>↓</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="fade-in">Sobre Mim</h2>
+            <div class="about-content fade-in">
+                <div class="card">
+                    <h3>Minha História</h3>
+                    <p>Natural de Vila Velha, Espírito Santo, formado em Técnico em Química pelo IFES (2013-2015) e Baracharel em Engenharia Química pela Faesa (2018-2022), trabalho a quase 10 anos na maior produtora de aço do Brasil desempenhando diversas funções, mais recentemente como Especialista da Área de Laboratórios onde tenho contato diário com todos os processos de redução.</p>
+                    <br>
+                    <p>Ao longo do tempo, desenvolvi novas metodologias, ferramentas e sistemas de controle e gestão para diminuir desvios operacionais e engajamento da equipe, onde alguns desses projetos e melhorias estão na seção de 'Destaques' abaixo. Também atuo como professor voluntário no IFES de Vila Velha, estabelecendo parcerias entre a indústria e o instituto.</p>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 20px; background: linear-gradient(45deg, #ffe896, #F7FEE7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;">Principais Habilidades</h3>
+                    <div class="skills">
+                        <div class="skill fade-in">
+                            <h4>📊 Hard Skills</h4>
+                            <p>Conhecimento transversal do processo produtivo do aço, resolução de problemas e controle de processo.</p>
+                        </div>
+                        <div class="skill fade-in">
+                            <h4>🤝 Soft Skills</h4>
+                            <p>Proatividade, trabalho em equipe, dinamismo, cooperatividade e gestão da mudança.</p>
+                        </div>
+                        <div class="skill fade-in">
+                            <h4>🇺🇸 Idioma</h4>
+                            <p>Nível de inglês B1 na escala CEF ou P1+ na escala PLS (realizado em 11/2023).</p>
+                        </div>
+                        <div class="skill fade-in">
+                            <h4>🛠️ Ferramentas</h4>
+                            <p>Minitab, PowerBI, Pacote Office Avançado (Excel, PowerPoint, etc.) e SDK. </p>
+                        </div>
+                        <div class="skill fade-in">
+                            <h4>👨‍💻 Programação</h4>
+                            <p>Python, VBA, JavaScript,<br>CSS, C++ e Matlab.</p>
+                        </div>
+                        <div class="skill fade-in">
+                            <h4>🤖 Inteligência Artificial</h4>
+                            <p>Desenvolvimento de algorítmos de predição e de visão computacional para o processo produtivo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section experience">
+        <div class="container">
+            <h2 class="fade-in">Experiência Profissional</h2>
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <div class="card">
+                        <h3>Especialista de Laboratórios</h3>
+                        <h4 style="background: linear-gradient(45deg, #ffe896, #F7FEE7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;">ArcelorMittal Tubarão</h4>
+                        <span style="color: #BFD8F1;"><i>2023 - Presente</i></span>
+                        <p>Responsável pelo laboratório da redução (ensaios físicos-metalúrgicos), desenvolvimento de metodologias e procedimentos, responsável técnico por auditorias internas, aquisição de ativos, gestão das rotinas analíticas e interface com clientes internos (Coqueria, Sinterização, Coprodutos e Alto-forno) e externos.</p>
+                    </div>
+                </div>
+                <div class="timeline-item fade-in">
+                    <div class="card">
+                        <h3>Técnico de Laboratórios</h3>
+                        <h4 style="background: linear-gradient(45deg, #ffe896, #F7FEE7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;">ArcelorMittal Tubarão</h4>
+                        <span style="color: #BFD8F1;"><i>2018 - 2023</i></span>
+                        <p>Execução do desenvolvimento de metodologias, técnicas operacionais e calibração de equipamentos no laboratório, bem como gestão de certificados e processos analíticos.</p>
+                    </div>
+                </div>
+                <div class="timeline-item fade-in">
+                    <div class="card">
+                        <h3>Técnico de Via Úmida</h3>
+                        <h4 style="background: linear-gradient(45deg, #ffe896, #F7FEE7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;">ArcelorMittal Tubarão</h4>
+                        <span style="color: #BFD8F1;"><i>2017 - 2018</i></span>
+                        <p>Realização de análises de rotina no laboratório de ensaios químicos, verificação de equipamentos, avaliação e liberação dos resultados para clientes internos.</p>
+                    </div>
+                </div>
+                <div class="timeline-item fade-in">
+                    <div class="card">
+                        <h3>Estagiário de Laboratório</h3>
+                        <h4 style="background: linear-gradient(45deg, #ffe896, #F7FEE7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;">ArcelorMittal Tubarão</h4>
+                        <span style="color: #BFD8F1;"><i>2016 - 2017</i></span>
+                        <p>Aprendizado de técnicas de rotina no laboratório de ensaios químicos, controle de estoque, aplicação de Kanban e 5S.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects">
+        <div class="container">
+            <h2 class="fade-in">Destaques</h2>
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-carousel" id="carousel-1">
+                        <div class="carousel-container">
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/09/whatsapp-image-2025-09-01-at-09.17.47.jpeg">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/09/whatsapp-image-2025-09-01-at-09.09.54.jpeg">
+                            </div>
+                        </div>
+                        <button class="carousel-arrows carousel-prev">‹</button>
+                        <button class="carousel-arrows carousel-next">›</button>
+                        <div class="carousel-nav">
+                            <span class="carousel-dot active"></span>
+                            <span class="carousel-dot"></span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Novas Metodologias</h3>
+                        <p>Desenvolvida novas técnicas e tamanho do escopo de atuação do laboratório para as necessidades vigentes do processo produtivo, como o desenvolvimento e validação dos ensaios de: <b>'RI'</b> (Reduction Index) para sínter; <b>'Crepitação'</b> para minérios; <b>'FSA'</b> (Forno de Soleira Aquecida) para carvão; <b>'LTD'</b> (Low Temperature Disintegration) para sínter, este inédito no grupo FCLatam; análises químicas via <b>'ICP'</b> (Inductively Coupled Plasma) para minérios, recirculados e sínter; implementação, junto com a medicina do trabalho, do <b>soro glicosado</b> como primeiro-socorros nas ocorrências com cal virgem; entre outros.</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <iframe class="project-iframe" src="https://www.youtube.com/embed/_Zr8NhqV04o?rel=0&modestbranding=1&fs=0&cc_load_policy=0&iv_load_policy=3&autohide=1" title="Toolbox" allowfullscreen></iframe>
+                    <div class="project-info">
+                        <h3>CheckView</h3>
+                        <p>Software desenvolvido para detectar por imagem, em tempo-real, a qualidade das matérias-primas recebidas no laboratório. Em caso de uma amostra ruim, é enviado automaticamente um e-mail para os clientes internos a foto do material. Este sistema conta com determinação da granulometria, coloração anômala, imperfeição no formato de pelota, entre outras funcionalidades. Todo o sistema está integrado com os outros sistemas de rotina e sem custo para a planta.</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-carousel" id="carousel-4">
+                        <div class="carousel-container">
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/08/img_7747.jpg">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/09/whatsapp-image-2025-09-01-at-09.10.18-1.jpeg">
+                            </div>
+                        </div>
+                        <button class="carousel-arrows carousel-prev">‹</button>
+                        <button class="carousel-arrows carousel-next">›</button>
+                        <div class="carousel-nav">
+                            <span class="carousel-dot active"></span>
+                            <span class="carousel-dot"></span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Interação Cruzada de Segurança</h3>
+                        <p>Devido aos índices de ocorrências internos, foi desenvolvido um sistema, validado junto a diretoria e RH, para sorteio automático de funcionários da IDA, realizando interações em áreas que não fazem parte do cotidiano dos funcionários, aumentando a percepção de risco, diminuindo acidentes e deixando o ambiente de trabalho mais seguro. As interações ocorrem semanalmente com 02 grupos com 04 funcionários cada, dentre eles: supervisores, especialistas e contratadas.</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-carousel" id="carousel-5">
+                        <div class="carousel-container">
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/08/img_5904.jpg">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/08/80168064-bc9f-4e96-8c04-a4f40b226e28.jpg">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/08/e2050469-098d-4c61-b4b7-1bc295825bf0.jpg">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/08/20210208_134624.jpg">
+                            </div>
+                        </div>
+                        <button class="carousel-arrows carousel-prev">‹</button>
+                        <button class="carousel-arrows carousel-next">›</button>
+                        <div class="carousel-nav">
+                            <span class="carousel-dot active"></span>
+                            <span class="carousel-dot"></span>
+                            <span class="carousel-dot"></span>
+                            <span class="carousel-dot"></span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Semana Valores</h3>
+                        <p>Atuando desde 2019 na organização e comissão da seção de qualidade da 'Semana Valores' (originalmente chamada de 'Semana da Qualidade'), trazendo reflexões sobre o tema. Além disso, implementado o evento 'QualiLab' voltada para área de laboratórios, onde workshops internos são ministrados pelos responsáveis de cada área, dando senso de pertencimento e importância aos ensaios realizados e seus impactos no processo, bem como premiações para os funcionários que se destacam.</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <iframe class="project-iframe" src="https://www.youtube.com/embed/4plTB3cPNy8?rel=0&modestbranding=1&fs=0&cc_load_policy=0&iv_load_policy=3&autohide=1" title="Toolbox" allowfullscreen></iframe>
+                    <div class="project-info">
+                        <h3>Toolbox</h3>
+                        <p>Ferramenta desenvolvida para acelerar tratamento de dados no Excel através de um prompt de comando, onde se digita a funcionalidade desejada e o comando é realizado dentro do Excel, similar a chats de conversa com inteligências artificiais. A ferramenta foi desenvolvida para atender e otimizar rotinas estabelecidas no laboratório, com redução de 35% no tempo gasto nas atividades.</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-carousel" id="carousel-2">
+                        <div class="carousel-container">
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/08/img_4954.jpg">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/08/img_7243.jpg">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/08/img_4472.jpg">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/08/img_5012.jpg">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/08/img_7487.jpg">
+                            </div>
+                        </div>
+                        <button class="carousel-arrows carousel-prev">‹</button>
+                        <button class="carousel-arrows carousel-next">›</button>
+                        <div class="carousel-nav">
+                            <span class="carousel-dot active"></span>
+                            <span class="carousel-dot"></span>
+                            <span class="carousel-dot"></span>
+                            <span class="carousel-dot"></span>
+                            <span class="carousel-dot"></span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Benchmark, Sinergias e Workshops</h3>
+                        <p>Visando a democratização do conhecimento, melhoria contínua e aceleração de inovações, foram desenvolvidas iniciativas com outras unidades do grupo (fóruns e momentos técnicos) e visitas em outras empresas (Vale, SunCoke, Samarco, etc) envolvendo a equipe operacional para avaliar as melhores práticas de cada segmento e implementarmos na realidade do laboratório. Percebeu-se maior engajamento da equipe de turno, recebimento de prêmios de excelência internacionais para os ensaios metalúrgicos e maior criticidade nas análises.</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-carousel" id="carousel-3">
+                        <div class="carousel-container">
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/08/img_3899.jpg">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/08/img_3905.jpg">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/08/ifes_2.png">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/08/img_6230.jpg">
+                            </div>
+                        </div>
+                        <button class="carousel-arrows carousel-prev">‹</button>
+                        <button class="carousel-arrows carousel-next">›</button>
+                        <div class="carousel-nav">
+                            <span class="carousel-dot active"></span>
+                            <span class="carousel-dot"></span>
+                            <span class="carousel-dot"></span>
+                            <span class="carousel-dot"></span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Parceria IFES</h3>
+                        <p>Criado projeto integrador entre a área de laboratórios e o Intituto Federal do Espírito Santo de Vila Velha para fomentar pesquisas e sinergias de contratação de novos profissionais, uma vez que há escassez no mercado. Também, ministro aulas como professor voluntário na instituição para apresentar desafios reais de processo e consolidar o conhecimento teórico com a prática encontrada no mercado de trabalho.</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-carousel" id="carousel-7">
+                        <div class="carousel-container">
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/09/captura-de-tela-2025-09-01-101637.jpg">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/09/captura-de-tela-2025-09-01-101814.jpg">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/09/captura-de-tela-2025-09-01-101934.jpg">
+                            </div>
+                        </div>
+                        <button class="carousel-arrows carousel-prev">‹</button>
+                        <button class="carousel-arrows carousel-next">›</button>
+                        <div class="carousel-nav">
+                            <span class="carousel-dot active"></span>
+                            <span class="carousel-dot"></span>
+                            <span class="carousel-dot"></span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Sistema de Gestão do Turno</h3>
+                        <p>Desenvolvido, desde 2017, sistema de gestão do turno no laboratório, anteriormente realizado em papel. O sistema conta com: checklist digital (pioneiro em Tubarão); gestão de controle de certificados e equipamentos; KPI's de rotina, como ocorrências no recebimento da amostra (também integrado por e-mail com os clientes internos); report automático de pendências para o próximo turno; cobrança de verificações de equipamentos; entre outras funcionalidades. Este sistema foi desenvolvido sem custo.</p>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-carousel" id="carousel-6">
+                        <div class="carousel-container">
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/08/img_3443.jpg">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/09/20190822_173111.jpg">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://rnclabs.wordpress.com/wp-content/uploads/2025/08/img_3391.jpg">
+                            </div>
+                        </div>
+                        <button class="carousel-arrows carousel-prev">‹</button>
+                        <button class="carousel-arrows carousel-next">›</button>
+                        <div class="carousel-nav">
+                            <span class="carousel-dot active"></span>
+                            <span class="carousel-dot"></span>
+                            <span class="carousel-dot"></span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Treinamentos</h3>
+                        <p>Realizado diversos treinamentos ao longo do tempo, tendo como saída os projetos visto nesta seção. Alguns dos treinamentos realizados são: Análise elementar por ICP (UFSCar - SP), Data Science and AI (LabWare - PR), Difração de Raios-X DRX (Malvern Panalytical - SP), entre outros. Recentemente, em andamento treinamento Black Belt Lean Six Sigma (SETA - ES), com previsão de conclusão da parte teórica em 12/09/2025 e finalização do projeto em 20/04/2026.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="fade-in">Entre em Contato</h2>
+            <div class="contact-content">
+                <div class="contact-item fade-in">
+                    <div style="font-size: 2rem; margin-bottom: 15px;">📧</div>
+                    <h3>E-mail</h3>
+                    <p>renan.o.costa@arcelormittal.com.br</p>
+                </div>
+                <div class="contact-item fade-in">
+                    <div style="font-size: 2rem; margin-bottom: 15px;">📱</div>
+                    <h3>Telefone</h3>
+                    <p>+55 (27) 99718-2485</p>
+                </div>
+                <a href="https://linkedin.com/in/renan-oliveira-costa/" target="_blank" rel="noopener noreferrer" class="contact-item fade-in" style="text-decoration: none; color: inherit;">
+                    <div style="font-size: 2rem; margin-bottom: 15px;">💼</div>
+                    <h3>LinkedIn</h3>
+                    <p>Para mais informações</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Parallax Effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax-back');
+            const speed = 0.5;
+
+            parallaxElements.forEach(element => {
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translateZ(-1px) scale(2) translateY(${yPos}px)`;
+            });
+        });
+
+        // Navigation visibility
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                nav.classList.add('visible');
+            } else {
+                nav.classList.remove('visible');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    // Remove the visible class when element leaves viewport
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Hover effects for cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Dynamic background particles effect
+        function createParticles(container, particleCount = 50) {
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = Math.random() * 3 + 1 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.background = Math.random() > 0.5 ? 'rgba(194, 132, 0, 0.25)' : 'rgba(180, 200, 250, 0.25)';
+                particle.style.borderRadius = '50%';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animation = `float ${3 + Math.random() * 2}s ease-in-out infinite`;
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                particle.style.filter = `blur(${Math.random() * 2 + 1}px)`;
+                particle.style.zIndex = '1';
+                container.appendChild(particle);
+            }
+        }
+
+        // Initialize particles
+        // Initialize particles in hero and contact sections
+        const heroSection = document.querySelector('.hero');
+        const contactSection = document.querySelector('.contact');
+
+        createParticles(heroSection, 50); // 50 particles in hero
+        createParticles(contactSection, 50); // 70 particles in contact
+
+
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Carousel functionality
+        function initializeCarousel(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            const container = carousel.querySelector('.carousel-container');
+            const slides = carousel.querySelectorAll('.carousel-slide');
+            const dots = carousel.querySelectorAll('.carousel-dot');
+            const prevBtn = carousel.querySelector('.carousel-prev');
+            const nextBtn = carousel.querySelector('.carousel-next');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function goToSlide(index) {
+                currentSlide = index;
+                container.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+                // Update dots
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentSlide);
+                });
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                goToSlide(currentSlide);
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                goToSlide(currentSlide);
+            }
+
+            // Event listeners
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => goToSlide(index));
+            });
+
+            // Auto-play (optional)
+            setInterval(nextSlide, 6000); // Change slide every 6 seconds
+        }
+
+        // Initialize carousels after page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeCarousel('carousel-1');
+            initializeCarousel('carousel-2');
+            initializeCarousel('carousel-3');
+            initializeCarousel('carousel-4');
+            initializeCarousel('carousel-5');
+            initializeCarousel('carousel-6');
+            initializeCarousel('carousel-7');
+        });
+
+        // Initialize typing effect after page load
+        window.addEventListener('load', () => {
+            // dentro dos '' escrever nome da classe
+            const heroTitle = document.querySelector('');
+            const originalText = heroTitle.textContent;
+            setTimeout(() => {
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
