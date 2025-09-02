@@ -149,10 +149,14 @@
             display: flex;
             justify-content: center;
             list-style: none;
+            flex-direction: row;        /* Mantém horizontal */
+            flex-wrap: wrap;           /* Quebra linha se necessário */
+            gap: 10px;                 /* Espaçamento uniforme */
+            padding: 0 10px;           /* Margem lateral */
         }
 
         .nav li {
-            margin: 0 20px;
+            margin: 0 10px;
         }
 
         .nav a {
@@ -572,7 +576,7 @@
                             <p>Proatividade, trabalho em equipe, dinamismo, cooperatividade e gestão da mudança.</p>
                         </div>
                         <div class="skill fade-in">
-                            <h4>🇺🇸 Idioma</h4>
+                            <h4>🌍 Idioma</h4>
                             <p>Nível de inglês B1 na escala CEF ou P1+ na escala PLS (realizado em 11/2023).</p>
                         </div>
                         <div class="skill fade-in">
